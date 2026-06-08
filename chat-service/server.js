@@ -1,16 +1,15 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/db');
-const chatRoutes = require('./routes/chatRoutes');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const connectDB = require("./db");
 
 const app = express();
-connectDB();
 app.use(cors());
 app.use(express.json());
 
-app.get('/health', (req, res) => res.json({ service: 'chat-service', status: 'ok' }));
-app.use('/api/chat', chatRoutes);
+connectDB();
 
-const PORT = process.env.PORT || 3008;
-app.listen(PORT, () => console.log(`Chat Service running on port ${PORT}`));
+app.use("/api/chat", require("./chatRoutes"));
+
+const PORT = 5005;
+app.listen(PORT, () => console.log(`Chat Service jalan di port ${PORT}`));

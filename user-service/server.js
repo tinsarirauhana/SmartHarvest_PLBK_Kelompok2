@@ -1,17 +1,26 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const connectDB = require('./config/db');
-const userRoutes = require('./routes/userRoutes');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
+const connectDB = require("./db");
 
 const app = express();
-connectDB();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
-app.get('/health', (req, res) => res.json({ service: 'user-service', status: 'ok' }));
-app.use('/api', userRoutes);
+// Database Connection
+connectDB();
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`User Service running on port ${PORT}`));
+// Routes
+// Perhatikan: base path disesuaikan agar API Gateway mudah mengarahkan
+app.use("/api/users", require("./userRoutes"));
+
+app.get("/", (req, res) => {
+  res.send("User Service is Running...");
+});
+
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => {
+  console.log(`User Service running on port ${PORT}`);
+});
