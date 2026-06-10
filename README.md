@@ -47,58 +47,61 @@ API key gratis di: https://openweathermap.org/api
 
 ### 4. Jalankan semua service sekaligus
 ```bash
-npm run dev    # mode development (auto-restart dengan nodemon)
+npm run dev
 # atau
-npm start      # mode production
+npm start
 ```
 
 Atau jalankan satu per satu di terminal terpisah:
 ```bash
-cd user-service && npm run dev
-cd harvest-service && npm run dev
-# dst...
+cd api-gateway && node server.js
+cd user-service && node server.js
+cd harvest-service && node server.js
+cd order-service && node server.js
+cd weather-service && node server.js
+cd chat-service && node server.js
 ```
 
 ---
 
-## API Endpoints (via API Gateway port 3000)
+## API Endpoints
 
-### Auth & User
+### Auth & User — `http://localhost:5001/api/users`
 | Method | Endpoint | Deskripsi |
 |--------|----------|-----------|
-| POST | `/api/auth/register` | Registrasi user baru |
-| POST | `/api/auth/login` | Login, dapat token JWT |
+| POST | `/api/users/register` | Registrasi user baru |
+| POST | `/api/users/login` | Login, dapat token JWT |
 | GET | `/api/users` | Semua user (admin) |
 | GET | `/api/users/:id` | Detail user |
 | PUT | `/api/users/:id` | Update user |
 | DELETE | `/api/users/:id` | Hapus user (admin) |
 
-### Hasil Panen
+### Hasil Panen — `http://localhost:5002/api/panen`
 | Method | Endpoint | Deskripsi |
 |--------|----------|-----------|
-| POST | `/api/harvest` | Tambah panen (+ upload foto) |
-| GET | `/api/harvest` | Daftar panen |
-| GET | `/api/harvest/available` | Panen tersedia untuk matching |
-| GET | `/api/harvest/:id` | Detail panen |
-| PUT | `/api/harvest/:id` | Update panen |
-| DELETE | `/api/harvest/:id` | Hapus panen |
+| POST | `/api/panen` | Tambah panen (+ upload foto) |
+| GET | `/api/panen` | Daftar panen |
+| GET | `/api/panen/available` | Panen tersedia untuk matching |
+| GET | `/api/panen/:id` | Detail panen |
+| PUT | `/api/panen/:id` | Update panen |
+| DELETE | `/api/panen/:id` | Hapus panen |
 
-### Permintaan (Order)
+### Permintaan (Order) — `http://localhost:5003/api/permintaan`
 | Method | Endpoint | Deskripsi |
 |--------|----------|-----------|
-| POST | `/api/orders` | Buat permintaan (auto trigger matching) |
-| GET | `/api/orders` | Daftar permintaan |
-| GET | `/api/orders/:id` | Detail permintaan |
-| PUT | `/api/orders/:id` | Update permintaan |
-| DELETE | `/api/orders/:id` | Hapus permintaan |
+| POST | `/api/permintaan` | Buat permintaan (auto trigger matching) |
+| GET | `/api/permintaan` | Daftar permintaan |
+| GET | `/api/permintaan/:id` | Detail permintaan |
+| PUT | `/api/permintaan/:id` | Update permintaan |
+| DELETE | `/api/permintaan/:id` | Hapus permintaan |
 
-### Weather
+### Weather — `http://localhost:5004/api/weather`
 | Method | Endpoint | Deskripsi |
 |--------|----------|-----------|
 | GET | `/api/weather` | Cuaca saat ini (default: Banda Aceh) |
 | GET | `/api/weather/forecast` | Prakiraan cuaca |
 
-### Chat
+### Chat — `http://localhost:5005/api/chat`
 | Method | Endpoint | Deskripsi |
 |--------|----------|-----------|
 | POST | `/api/chat` | Kirim pesan |
@@ -124,7 +127,7 @@ Token didapat saat login.
 Petani Login
     ↓
 POST /api/panen  → harvest-service simpan data panen
-    
+
 Pedagang Login
     ↓
 POST /api/permintaan  → order-service simpan permintaan
@@ -142,7 +145,6 @@ Petani/Pedagang
 GET /api/weather → cek cuaca via weather-service
 POST /api/chat  → kirim pesan via chat-service
 GET /api/chat/:userId → lihat percakapan
-
 ```
 
 ---
@@ -155,8 +157,8 @@ Collections yang terbentuk otomatis:
 - `users` — dari user-service
 - `hasilpanens` — dari harvest-service
 - `permintaans` — dari order-service
-- `matchings` — dari matching-service
-- `recoveries` — dari circular-service
+- `matchings` — dari order-service (hasil matching)
+- `recoveries` — dari harvest-service (circular economy)
 - `chats` — dari chat-service
 
 ---
