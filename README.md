@@ -9,15 +9,12 @@ Arsitektur microservices untuk sistem **Smart Harvest and Circular Distribution 
 
 ```
 SMARTHARVEST_MICROSERVICES/
-├── api-gateway/          → Port 3000 — Pintu masuk semua request
-├── user-service/         → Port 3001 — Auth, registrasi, manajemen user
-├── harvest-service/      → Port 3002 — Input & kelola hasil panen
-├── order-service/        → Port 3003 — Permintaan komoditas pedagang
-├── matching-service/     → Port 3004 — Pencocokan supply & demand otomatis
-├── circular-service/     → Port 3005 — Pengelolaan panen rusak (circular economy)
-├── dashboard-service/    → Port 3006 — Statistik & monitoring admin
-├── weather-service/      → Port 3007 — Data cuaca (OpenWeatherMap)
-└── chat-service/         → Port 3008 — Pesan antara petani & pedagang
+├── api-gateway/          → Port 5000 — Pintu masuk semua request
+├── user-service/         → Port 5001 — Auth, registrasi, manajemen user
+├── harvest-service/      → Port 5002 — Input & kelola hasil panen
+├── order-service/        → Port 5003 — Permintaan komoditas pedagang
+├── weather-service/      → Port 5004 — Data cuaca (OpenWeatherMap)
+└── chat-service/         → Port 5005 — Pesan antara petani & pedagang
 ```
 
 ---
