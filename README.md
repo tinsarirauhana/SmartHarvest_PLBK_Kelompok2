@@ -157,8 +157,6 @@ Collections yang terbentuk otomatis:
 - `users` — dari user-service
 - `hasilpanens` — dari harvest-service
 - `permintaans` — dari order-service
-- `matchings` — dari order-service (hasil matching)
-- `recoveries` — dari harvest-service (circular economy)
 - `chats` — dari chat-service
 
 ---
