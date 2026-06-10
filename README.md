@@ -92,26 +92,6 @@ cd harvest-service && npm run dev
 | PUT | `/api/orders/:id` | Update permintaan |
 | DELETE | `/api/orders/:id` | Hapus permintaan |
 
-### Matching
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/api/matching` | Semua hasil matching |
-| GET | `/api/matching/:requestId` | Matching per permintaan |
-
-### Circular Economy
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| POST | `/api/circular` | Tambah recovery manual |
-| GET | `/api/circular` | Daftar recovery |
-| GET | `/api/circular/stats` | Statistik per metode |
-| PUT | `/api/circular/:id` | Update recovery |
-
-### Dashboard (Admin)
-| Method | Endpoint | Deskripsi |
-|--------|----------|-----------|
-| GET | `/api/dashboard/stats` | Statistik lengkap sistem |
-| GET | `/api/dashboard/harvest-trend` | Tren panen 6 bulan terakhir |
-
 ### Weather
 | Method | Endpoint | Deskripsi |
 |--------|----------|-----------|
@@ -143,21 +123,26 @@ Token didapat saat login.
 ```
 Petani Login
     ↓
-POST /api/harvest  → harvest-service simpan data
-    ↓ (jika kualitas = Rusak)
-circular-service.autoRecovery() dipanggil otomatis
+POST /api/panen  → harvest-service simpan data panen
     
 Pedagang Login
     ↓
-POST /api/orders  → order-service simpan permintaan
-    ↓ (otomatis)
-matching-service.runMatching() → cocokkan dengan harvest tersedia
+POST /api/permintaan  → order-service simpan permintaan
+    ↓ (otomatis, di dalam order-service)
+runMatching() → cocokkan dengan data panen tersedia dari harvest-service
     ↓
-Hasil matching tersimpan, status harvest & order diperbarui
+Status panen & permintaan diperbarui
 
 Admin Login
     ↓
-GET /api/dashboard/stats → aggregate data dari semua service
+GET /api/users → lihat semua user via user-service
+
+Petani/Pedagang
+    ↓
+GET /api/weather → cek cuaca via weather-service
+POST /api/chat  → kirim pesan via chat-service
+GET /api/chat/:userId → lihat percakapan
+
 ```
 
 ---
