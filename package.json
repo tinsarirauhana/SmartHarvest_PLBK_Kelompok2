@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "SmartHarvest Microservices - PLBK Universitas Syiah Kuala",
   "scripts": {
-    "install:all": "cd api-gateway && npm install && cd ../user-service && npm install && cd ../harvest-service && npm install && cd ../order-service && npm install && cd ../matching-service && npm install && cd ../circular-service && npm install && cd ../dashboard-service && npm install && cd ../weather-service && npm install && cd ../chat-service && npm install",
-    "dev": "concurrently \"cd api-gateway && npm run dev\" \"cd user-service && npm run dev\" \"cd harvest-service && npm run dev\" \"cd order-service && npm run dev\" \"cd matching-service && npm run dev\" \"cd circular-service && npm run dev\" \"cd dashboard-service && npm run dev\" \"cd weather-service && npm run dev\" \"cd chat-service && npm run dev\"",
-    "start": "concurrently \"cd api-gateway && npm start\" \"cd user-service && npm start\" \"cd harvest-service && npm start\" \"cd order-service && npm start\" \"cd matching-service && npm start\" \"cd circular-service && npm start\" \"cd dashboard-service && npm start\" \"cd weather-service && npm start\" \"cd chat-service && npm start\""
+    "install:all": "cd api-gateway && npm install && cd ../user-service && npm install && cd ../harvest-service && npm install && cd ../order-service && npm install && cd ../weather-service && npm install && cd ../chat-service && npm install",
+    "dev": "concurrently \"node api-gateway/server.js\" \"node user-service/server.js\" \"node harvest-service/server.js\" \"node order-service/server.js\" \"node weather-service/server.js\" \"node chat-service/server.js\"",
+    "start": "concurrently \"node api-gateway/server.js\" \"node user-service/server.js\" \"node harvest-service/server.js\" \"node order-service/server.js\" \"node weather-service/server.js\" \"node chat-service/server.js\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
